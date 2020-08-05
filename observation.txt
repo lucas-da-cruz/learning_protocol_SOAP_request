@@ -1,0 +1,89 @@
+JAX-WS(Java API for XML - Web Service) é a especificação responsável pelo serviço SOAP
+
+As requisições SOAP sempre utilizam requisicoes POST e XML
+
+WSDL = Web Service Definition Language (localhost:8081/estoques?wsdl
+A URL do WSDL sempre deverá existir em um serviço SOAP, delimitando o que
+pode e não pode do meu serviço(Especie de contrato). Muito importante para o clentes do serviço
+
+O SOAP funciona apenas com requisições HTTP POST, sendo enviado um XML na requisição, e caso
+aquela requisição seja valida, retornando um XML na response HTTP.
+
+Para testar o as requisições SOAP é preciso baixar o SOAPUI 5.6.0 e adicionar o caminho da wsdl em
+uma nova aplicação SOAP (ex: http://localhost:8081/estoques?wsdl)
+
+Então o SOAPUI irá fazer o mapeamento das requisições da URL passada.
+
+
+O padrão (especificação) para criar um serviço web com SOAP se chama JAX-WS. Apesar de ser uma especificação do Java EE,
+ela já vem embutido dentro de JRE. Ou seja, não é preciso instalar nada além do JRE para criar e consumir um serviço web SOAP.
+
+As outras siglas também são referente de especificações Java EE:
+
+JAX-RS, especificação para criar serviços web baseado no REST
+JAX-B, especificação para mapear (binding) XML para objetos Java
+JAX-RPC, antigo padrão de serviços web, o nome antigo do JAX-WS
+JAX-P, especificação para ler e escrever XML (processing)
+
+O contrato de serviços SOAP é normalmente um WSDL. O WSDL (Web Service Description Language) também é um XML que define todos
+os tipos, mensagens, operações, endereços (e outras coisas) do serviço.
+
+
+SOAP é um padrão ou protocolo que define o XML que trafega entre Cliente e Servidor quando o serviço web é executado.
+Esse XML também é chamado de mensagem SOAP.
+
+Ela consiste de três partes: um Envelope que é o elemento raiz. Dentro dele pode ter um Header para definir meta-informações
+como tokens, senha, etc e um Body que contem os dados principais da mensagem:
+
+É importante mencionar que a mensagem SOAP normalmente trafega em cima do protocolo HTTP, no entanto não depende dele.
+Ou seja, a mensagem SOAP poderia ser trafegada usando outros protocolos.
+
+No SOAP não há nada de complexo! Os elementos são: Envelope, Header, Body e Fault. Lembrando que Header é opcional:
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+   <S:Body>
+      <ns2:getItensResponse xmlns:ns2="http://ws.estoque.com.br/">
+         <return>
+            <codigo>GAL</codigo>
+            <nome>Galaxy Tab</nome>
+            <quantidade>3</quantidade>
+            <tipo>Tablet</tipo>
+         </return>
+         ...
+      </ns2:getItensResponse>
+   </S:Body>
+</S:Envelope>
+
+O elemento Fault aparece dentro do Body. Veremos ainda mais detalhes sobre o tratamento de erros e exceções:
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+   <S:Body>
+      <S:Fault xmlns:ns4="http://www.w3.org/2003/05/soap-envelope">
+         <faultcode>S:Server</faultcode>
+         <faultstring>java.lang.RuntimeException</faultstring>
+      </S:Fault>
+   </S:Body>
+</S:Envelope>
+
+Importante é que o Header deve ser sempre o primeiro elemento filho do Envelope.
+<env:Envelope xmlns:env="http://www.w3.org/2002/12/soap-envelope">
+ <env:Header>
+  <n:alertcontrol xmlns:n="http://example.org/alertcontrol">
+   <n:priority>1</n:priority>
+   <n:expires>2001-06-22T14:00:00-05:00</n:expires>
+  </n:alertcontrol>
+ </env:Header>
+ <env:Body>
+  <m:alert xmlns:m="http://example.org/alert">
+   <m:msg>Pick up Mary at school at 2pm</m:msg>
+  </m:alert>
+ </env:Body>
+</env:Envelope>
+
+
+O que pode conter em um HEADER?
+- informações sobre o usuário (autenticação e autorização)
+- data da criação da mensagem e tempo de validade
+- tempo máximo que a mensagem deve ser processada
+- prioridade da mensagem
+- identificação da transação
+- entre várias outras possibilidades
+
