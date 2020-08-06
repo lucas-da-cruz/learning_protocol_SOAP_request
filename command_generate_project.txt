@@ -1,0 +1,8 @@
+é possivel por meio de um comando criar toda a estrutura de classe do meu projeto
+por meio de uma ferramenta, referenciando apenas o WSDL da API, podendo então criar
+o serviço cliente em cima dos models corretos.
+
+wsimport -s src -p br.com.estoque.cliente http://localhost:8081/estoques?wsdl
+
+wsimport e wsdl2java são ferramentas de linha de comando para gerar as classes Java a partir do WSDL.
+As classes geradas ajudam escrever programas no lado do cliente ou servidor para serviços Web e abstraiam todo o trabalho com SOAP e HTTP em geral. Essas classes também são chamadas de stubs de cliente ou esqueletos de servidores.

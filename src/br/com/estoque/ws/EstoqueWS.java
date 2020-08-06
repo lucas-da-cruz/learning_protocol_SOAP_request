@@ -18,6 +18,8 @@ import javax.xml.ws.ResponseWrapper;
 import java.util.List;
 
 @WebService
+//Literal = Não vêm o DataType no xml / Encoded = Vêm o DataType, não é recomendado seu uso
+//WRAPPED encapsula a mensagem
 @SOAPBinding(style = Style.DOCUMENT, use = Use.LITERAL, parameterStyle = ParameterStyle.WRAPPED)
 public class EstoqueWS {
     private ItemDao dao = new ItemDao();
