@@ -1,0 +1,2 @@
+Comando para gerar o arquivo .wsdl dentro do projeto:
+wsgen -wsdl -cp bin br.com.caelum.estoque.ws.EstoqueWS

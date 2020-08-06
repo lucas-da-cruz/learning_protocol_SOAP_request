@@ -1,0 +1,13 @@
+Através do Header e Body podemos separar as meta-informações dos dados principais,
+o que é muito comum em protocolos de comunicação. No Body ficam os dados principais
+da mensagem SOAP. Já no Header colocaremos informações de autenticação/autorização,
+validade da mensagem, tempos mínimo de resposta ou dados sobre a transação entre várias outras possibilidades.
+
+Em ambiente SOAP é bem comum trabalharmos com alguns intermediários entre cliente e
+server que validam os Headers e até os manipulam. Por exemplo, poderíamos ter um
+intermediário que verifica os dados de autenticação/autorização antes da mensagem chegar
+no servidor final. Um outro poderia fazer uma auditoria para logar informações importantes
+do que está sendo feito. Esses intermediários tem até um nome específico no mundo SOAP:
+nós o chamamos de Node (nó):
+
+Client SOAP <--> SOAP NODE (Autenticação) <--> SOAP NODE (Log) <--> Servidor SOAP

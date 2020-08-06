@@ -87,3 +87,25 @@ O que pode conter em um HEADER?
 - identificação da transação
 - entre várias outras possibilidades
 
+O XSD ou XML Schema ou apenas Schema descreve a estrutura de um documento XML.
+O XSD define como se compor uma mensagem SOAP, o que pode aparecer no XML, quantas vezes,
+quais tipos, nomenclatura etc. Segue um exemplo do token do usuário no XSD:
+
+Ex:   <xs:complexType name="tokenUsuario">
+        <xs:sequence>
+          <xs:element name="token" type="xs:string"/>
+          <xs:element name="dataValidade" type="xs:dateTime"/>
+        </xs:sequence>
+      </xs:complexType>
+
+
+O elemento <message> do WSDL descreve os dados a serem trocados entre cliente e servidor.
+Ou seja, cada mensagem representa uma entrada ou saída.
+
+Um <portType> pode ter várias operations e para ser correto, nem sempre uma operação precisa
+ter entrada E saída. Por exemplo o <portType> abaixo é valido:
+<portType>
+  <operation name="CadastrarItem" parameterOrder="parameters tokenUsuario">
+     <input wsam:Action="CadastrarItem" message="tns:CadastrarItem"/>
+  </operation>
+</portType>
